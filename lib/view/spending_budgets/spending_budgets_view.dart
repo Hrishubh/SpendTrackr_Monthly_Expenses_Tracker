@@ -16,27 +16,27 @@ class SpendingBudgetsView extends StatefulWidget {
 class _SpendingBudgetsViewState extends State<SpendingBudgetsView> {
   List budgetArr = [
     {
-      "name": "Auto & Transport",
-      "icon": "assets/img/auto_&_transport.png",
-      "spend_amount": "25.99",
-      "total_budget": "400",
-      "left_amount": "250.01",
+      "name": "Security",
+      "icon": "assets/img/security.png",
+      "spend_amount": "1960",
+      "total_budget": "3000",
+      "left_amount": "1040",
       "color": TColor.secondaryG
     },
     {
       "name": "Entertainment",
       "icon": "assets/img/entertainment.png",
-      "spend_amount": "50.99",
-      "total_budget": "600",
-      "left_amount": "300.01",
+      "spend_amount": "4950",
+      "total_budget": "7000",
+      "left_amount": "2050",
       "color": TColor.secondary50
     },
     {
-      "name": "Security",
-      "icon": "assets/img/security.png",
-      "spend_amount": "5.99",
-      "total_budget": "600",
-      "left_amount": "250.01",
+      "name": "Auto & Transport",
+      "icon": "assets/img/auto_&_transport.png",
+      "spend_amount": "7500",
+      "total_budget": "10000",
+      "left_amount": "2500",
       "color": TColor.primary10
     },
   ];
@@ -88,14 +88,14 @@ class _SpendingBudgetsViewState extends State<SpendingBudgetsView> {
                 Column(
                   children: [
                     Text(
-                      "\$82,90",
+                      "₹14,410",
                       style: TextStyle(
                           color: TColor.white,
                           fontSize: 24,
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "of \$2,0000 budget",
+                      "of ₹20,000 budget",
                       style: TextStyle(
                           color: TColor.gray30,
                           fontSize: 12,

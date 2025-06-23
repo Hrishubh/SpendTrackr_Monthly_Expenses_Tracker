@@ -93,7 +93,7 @@ class _SubscriptionInfoViewState extends State<SubscriptionInfoView> {
                                 height: 15,
                               ),
                               Text(
-                                "\$${widget.sObj["price"]}",
+                                "₹${widget.sObj["price"]}",
                                 style: TextStyle(
                                     color: TColor.gray30,
                                     fontSize: 20,
@@ -133,7 +133,7 @@ class _SubscriptionInfoViewState extends State<SubscriptionInfoView> {
                                     ),
                                     ItemRow(
                                       title: "First payment",
-                                      value: "08.07.2023",
+                                      value: "08.07.2025",
                                     ),
                                     ItemRow(
                                       title: "Reminder",
@@ -141,7 +141,7 @@ class _SubscriptionInfoViewState extends State<SubscriptionInfoView> {
                                     ),
                                     ItemRow(
                                       title: "Currency",
-                                      value: "USD (\$)",
+                                      value: "INR (₹)",
                                     ),
                                   ],
                                 ),

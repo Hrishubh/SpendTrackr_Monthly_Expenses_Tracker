@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 import 'package:calendar_agenda/calendar_agenda.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +23,18 @@ class _CalenderViewState extends State<CalenderView> {
   Random random = new Random();
 
   List subArr = [
-    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "5.99"},
+    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "199"},
     {
       "name": "YouTube Premium",
       "icon": "assets/img/youtube_logo.png",
-      "price": "18.99"
+      "price": "399"
     },
     {
       "name": "Microsoft OneDrive",
       "icon": "assets/img/onedrive_logo.png",
-      "price": "29.99"
+      "price": "250"
     },
-    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "15.00"}
+    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "500"}
   ];
 
     @override
@@ -45,6 +46,14 @@ class _CalenderViewState extends State<CalenderView> {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
+    String formattedMonth =
+        DateFormat('MMMM').format(selectedDateNotAppBBar); // June
+    String formattedDay = DateFormat('d').format(selectedDateNotAppBBar); // 22
+    String formattedYear =
+        DateFormat('y').format(selectedDateNotAppBBar); // 2025
+    String formattedWeekday =
+        DateFormat('EEEE').format(selectedDateNotAppBBar); // Sunday
+
     return Scaffold(
       backgroundColor: TColor.gray,
       body: SingleChildScrollView(
@@ -111,7 +120,7 @@ class _CalenderViewState extends State<CalenderView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "3 subscription for today",
+                                "1 subscription due today",
                                 style: TextStyle(
                                     color: TColor.gray30,
                                     fontSize: 14,
@@ -136,7 +145,7 @@ class _CalenderViewState extends State<CalenderView> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "January",
+                                        formattedMonth,
                                         style: TextStyle(
                                             color: TColor.white,
                                             fontSize: 12,
@@ -226,14 +235,14 @@ class _CalenderViewState extends State<CalenderView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "January",
+                        formattedMonth,
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "\$24.98",
+                        "₹3,497",
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 20,
@@ -245,7 +254,7 @@ class _CalenderViewState extends State<CalenderView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "01.08.2023",
+                        "$formattedDay $formattedMonth $formattedYear",
                         style: TextStyle(
                             color: TColor.gray30,
                             fontSize: 12,

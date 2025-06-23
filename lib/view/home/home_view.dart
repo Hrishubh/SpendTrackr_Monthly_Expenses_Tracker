@@ -19,33 +19,33 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool isSubscription = true;
   List subArr = [
-    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "5.99"},
+    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "199"},
     {
       "name": "YouTube Premium",
       "icon": "assets/img/youtube_logo.png",
-      "price": "18.99"
+      "price": "399"
     },
     {
       "name": "Microsoft OneDrive",
       "icon": "assets/img/onedrive_logo.png",
-      "price": "29.99"
+      "price": "250"
     },
-    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "15.00"}
+    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "500"}
   ];
 
   List bilArr = [
-    {"name": "Spotify", "date": DateTime(2023, 07, 25), "price": "5.99"},
+    {"name": "Spotify", "date": DateTime(2025, 07, 25), "price": "199"},
     {
       "name": "YouTube Premium",
-      "date": DateTime(2023, 07, 25),
-      "price": "18.99"
+      "date": DateTime(2025, 07, 25),
+      "price": "399"
     },
     {
       "name": "Microsoft OneDrive",
-      "date": DateTime(2023, 07, 25),
-      "price": "29.99"
+      "date": DateTime(2025, 07, 25),
+      "price": "250"
     },
-    {"name": "NetFlix", "date": DateTime(2023, 07, 25), "price": "15.00"}
+    {"name": "NetFlix", "date": DateTime(2025, 07, 25), "price": "500"}
   ];
 
   @override
@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
                         height: media.width * 0.04,
                       ),
                       Text(
-                        "\$1,235",
+                        "₹3497",
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 40,
@@ -175,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
                             Expanded(
                               child: StatusButton(
                                 title: "Highest subs",
-                                value: "\$19.99",
+                                value: "₹500",
                                 statusColor: TColor.primary10,
                                 onPressed: () {},
                               ),
@@ -186,7 +186,7 @@ class _HomeViewState extends State<HomeView> {
                             Expanded(
                               child: StatusButton(
                                 title: "Lowest subs",
-                                value: "\$5.99",
+                                value: "₹99",
                                 statusColor: TColor.secondaryG,
                                 onPressed: () {},
                               ),

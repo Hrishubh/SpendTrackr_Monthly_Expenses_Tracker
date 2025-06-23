@@ -73,7 +73,7 @@ class UpcomingBillRow extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                "\$${sObj["price"]}",
+                "₹${sObj["price"]}",
                 style: TextStyle(
                     color: TColor.white,
                     fontSize: 14,
