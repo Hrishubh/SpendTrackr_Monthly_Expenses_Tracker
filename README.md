@@ -11,13 +11,13 @@
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [Screenshots](#-screenshots)
 - [Key Features](#-key-features)
 - [Technology Stack](#-technology-stack)
 - [Firebase Integration](#-firebase-integration)
 - [Installation](#-installation)
 - [Firebase Setup](#-firebase-setup)
 - [Usage](#-usage)
-- [Screenshots](#-screenshots)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -33,6 +33,84 @@
 - **Beautiful UI/UX**: Modern, intuitive, and responsive design for a delightful user experience.
 - **Insightful Analytics**: Visualize spending patterns with charts and summaries.
 - **Cross-Platform**: Runs seamlessly on both Android and iOS devices.
+
+---
+
+## 🖼 Screenshots
+
+Below are screenshots demonstrating the main features and UI of SpendTrackr:
+
+### Cover Screen
+<div align="center">
+  <img src="assets/readme_img/Cover_Screen.jpg" alt="Dashboard" width="300"/>
+  <br/>
+  <em>Cover Screen of the application.</em>
+</div>
+
+---
+
+### Login Screens
+<div align="center">
+  <img src="assets/readme_img/Login_Screen.jpg" alt="Dashboard" width="300"/>
+  <img src="assets/readme_img/Login_Screen2.jpg" alt="Dashboard" width="300"/>
+  
+  <br/>
+  <em>Login Pages of the application with options to login with Google, Apple (soon) & Facebok (soon).</em>
+</div>
+
+---
+
+### Dashboard
+<div align="center">
+  <img src="assets/readme_img/Dashboard.jpg" alt="Dashboard" width="300"/>
+  <br/>
+  <em>Comprehensive overview of your monthly spending, budgets, and quick actions.</em>
+</div>
+
+---
+
+### My Budget
+<div align="center">
+  <img src="assets/readme_img/MyBudget.jpg" alt="My Budget" width="300"/>
+  <br/>
+  <em>Track your budgets and monitor your spending progress by category.</em>
+</div>
+
+---
+
+### Card Details
+<div align="center">
+  <img src="assets/readme_img/CardDetails.jpg" alt="Card Details" width="300"/>
+  <br/>
+  <em>View detailed information about your cards and transactions.</em>
+</div>
+
+---
+
+### Add Subscription
+<div align="center">
+  <img src="assets/readme_img/Add_Subscription.jpg" alt="Add Subscription" width="300"/>
+  <br/>
+  <em>Easily add and manage recurring subscriptions.</em>
+</div>
+
+---
+
+### Subscription Schedule
+<div align="center">
+  <img src="assets/readme_img/Subscription_Schedule.jpg" alt="Subscription Schedule" width="300"/>
+  <br/>
+  <em>See upcoming subscription payments and their schedules.</em>
+</div>
+
+---
+
+### Settings
+<div align="center">
+  <img src="assets/readme_img/Settings.jpg" alt="Settings" width="300"/>
+  <br/>
+  <em>Customize your app experience and manage preferences.</em>
+</div>
 
 ---
 
@@ -267,84 +345,6 @@ For detailed setup instructions, see [`FIREBASE_SETUP.md`](FIREBASE_SETUP.md)
    - View user profile
    - Sign out securely
    - App preferences
-
----
-
-## 🖼 Screenshots
-
-Below are screenshots demonstrating the main features and UI of SpendTrackr:
-
-### Dashboard
-<div align="center">
-  <img src="assets/readme_img/Cover_Screen.jpg" alt="Dashboard" width="300"/>
-  <br/>
-  <em>Cover Screen of the application.</em>
-</div>
-
----
-
-### Dashboard
-<div align="center">
-  <img src="assets/readme_img/Login_Screen.jpg" alt="Dashboard" width="300"/>
-  <img src="assets/readme_img/Login_Screen2.jpg" alt="Dashboard" width="300"/>
-  
-  <br/>
-  <em>Login Pages of the application with options to login with Google, Apple (soon) & Facebok (soon).</em>
-</div>
-
----
-
-### Dashboard
-<div align="center">
-  <img src="assets/readme_img/Dashboard.jpg" alt="Dashboard" width="300"/>
-  <br/>
-  <em>Comprehensive overview of your monthly spending, budgets, and quick actions.</em>
-</div>
-
----
-
-### My Budget
-<div align="center">
-  <img src="assets/readme_img/MyBudget.jpg" alt="My Budget" width="300"/>
-  <br/>
-  <em>Track your budgets and monitor your spending progress by category.</em>
-</div>
-
----
-
-### Card Details
-<div align="center">
-  <img src="assets/readme_img/CardDetails.jpg" alt="Card Details" width="300"/>
-  <br/>
-  <em>View detailed information about your cards and transactions.</em>
-</div>
-
----
-
-### Add Subscription
-<div align="center">
-  <img src="assets/readme_img/Add_Subscription.jpg" alt="Add Subscription" width="300"/>
-  <br/>
-  <em>Easily add and manage recurring subscriptions.</em>
-</div>
-
----
-
-### Subscription Schedule
-<div align="center">
-  <img src="assets/readme_img/Subscription_Schedule.jpg" alt="Subscription Schedule" width="300"/>
-  <br/>
-  <em>See upcoming subscription payments and their schedules.</em>
-</div>
-
----
-
-### Settings
-<div align="center">
-  <img src="assets/readme_img/Settings.jpg" alt="Settings" width="300"/>
-  <br/>
-  <em>Customize your app experience and manage preferences.</em>
-</div>
 
 ---
 
