@@ -42,6 +42,16 @@ dependencies:
   carousel_slider: ^5.0.0
   card_swiper:
     path: dev_lib/card_swiper
+  
+  # Firebase dependencies (compatible with Flutter 3.19.6)
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  firebase_storage: ^11.6.0
+  
+  # Additional utilities
+  provider: ^6.1.1
+  uuid: ^4.2.1
 
 dev_dependencies:
   flutter_test:

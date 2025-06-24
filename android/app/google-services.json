@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "601113900606",
+    "project_id": "spendtrackr-4d641",
+    "storage_bucket": "spendtrackr-4d641.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601113900606:android:08749cc15f95b4632d836f",
+        "android_client_info": {
+          "package_name": "app.bhandarihrishubh.SpendTrackr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601113900606-4efvtjr8pvanm5apahchi1cdukvrsf4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaCFaStrzudXYV9kXndlX3hB06CYA_6JQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601113900606-4efvtjr8pvanm5apahchi1cdukvrsf4e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "601113900606-2mio08ie9amaq9v5gvqoflfe08a229q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.bhandarihrishubh.spendTrackr"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601113900606:android:b6728544d4b2887a2d836f",
+        "android_client_info": {
+          "package_name": "com.bhandarihrishubh.SpendTrackr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601113900606-4efvtjr8pvanm5apahchi1cdukvrsf4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaCFaStrzudXYV9kXndlX3hB06CYA_6JQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601113900606-4efvtjr8pvanm5apahchi1cdukvrsf4e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "601113900606-2mio08ie9amaq9v5gvqoflfe08a229q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.bhandarihrishubh.spendTrackr"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

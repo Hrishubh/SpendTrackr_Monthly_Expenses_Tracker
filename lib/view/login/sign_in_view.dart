@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:SpendTrackr/view/login/sign_up_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';
 import '../../common_widget/round_textfield.dart';
 import '../../common_widget/secondary_boutton.dart';
+import '../../providers/auth_provider.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -80,7 +82,33 @@ class _SignInViewState extends State<SignInView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (txtEmail.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please enter your email address'),
+                            backgroundColor: Colors.orange,
+                          ),
+                        );
+                        return;
+                      }
+
+                      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                      final success = await authProvider.resetPassword(txtEmail.text.trim());
+
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              success 
+                                ? 'Password reset email sent!'
+                                : authProvider.errorMessage ?? 'Failed to send reset email'
+                            ),
+                            backgroundColor: success ? Colors.green : Colors.red,
+                          ),
+                        );
+                      }
+                    },
                     child: Text(
                       "Forgot password",
                       style: TextStyle(color: TColor.gray50, fontSize: 14),
@@ -95,13 +123,31 @@ class _SignInViewState extends State<SignInView> {
 
               PrimaryButton(
                 title: "Sign In",
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SocialLoginView(),
-                  //   ),
-                  // );
+                onPressed: () async {
+                  if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please fill in all fields'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                  final success = await authProvider.signIn(
+                    email: txtEmail.text.trim(),
+                    password: txtPassword.text,
+                  );
+
+                  if (!success && mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(authProvider.errorMessage ?? 'Sign in failed'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
               ),
               const Spacer(),

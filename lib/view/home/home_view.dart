@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:SpendTrackr/common/color_extension.dart';
 
 import '../../common_widget/custom_arc_painter.dart';
@@ -8,6 +9,9 @@ import '../../common_widget/subscription_home_row.dart';
 import '../../common_widget/upcoming_bill_row.dart';
 import '../settings/settings_view.dart';
 import '../subscription_info/subscription_info_view.dart';
+import '../../providers/auth_provider.dart';
+import '../../services/subscription_service.dart';
+import '../../models/subscription_model.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -18,35 +22,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool isSubscription = true;
-  List subArr = [
-    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "199"},
-    {
-      "name": "YouTube Premium",
-      "icon": "assets/img/youtube_logo.png",
-      "price": "399"
-    },
-    {
-      "name": "Microsoft OneDrive",
-      "icon": "assets/img/onedrive_logo.png",
-      "price": "250"
-    },
-    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "500"}
-  ];
-
-  List bilArr = [
-    {"name": "Spotify", "date": DateTime(2025, 07, 25), "price": "199"},
-    {
-      "name": "YouTube Premium",
-      "date": DateTime(2025, 07, 25),
-      "price": "399"
-    },
-    {
-      "name": "Microsoft OneDrive",
-      "date": DateTime(2025, 07, 25),
-      "price": "250"
-    },
-    {"name": "NetFlix", "date": DateTime(2025, 07, 25), "price": "500"}
-  ];
+  final SubscriptionService _subscriptionService = SubscriptionService();
 
   @override
   Widget build(BuildContext context) {
@@ -232,39 +208,118 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            if (isSubscription)
-              ListView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: subArr.length,
-                  itemBuilder: (context, index) {
-                    var sObj = subArr[index] as Map? ?? {};
+            Consumer<AuthProvider>(
+              builder: (context, authProvider, child) {
+                if (authProvider.user == null) {
+                  return const Center(child: Text('Please sign in to view data'));
+                }
 
-                    return SubScriptionHomeRow(
-                      sObj: sObj,
-                      onPressed: () {
+                if (isSubscription) {
+                  return StreamBuilder<List<SubscriptionModel>>(
+                    stream: _subscriptionService.getUserSubscriptions(authProvider.user!.uid),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionInfoView( sObj: sObj ) ));
-                      },
-                    );
-                  }),
-            if (!isSubscription)
-              ListView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: subArr.length,
-                  itemBuilder: (context, index) {
-                    var sObj = subArr[index] as Map? ?? {};
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
 
-                    return UpcomingBillRow(
-                      sObj: sObj,
-                      onPressed: () {},
-                    );
-                  }),
+                      final subscriptions = snapshot.data ?? [];
+
+                      if (subscriptions.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Center(
+                            child: Text(
+                              'No subscriptions found.\nAdd your first subscription!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                        );
+                      }
+
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: subscriptions.length,
+                        itemBuilder: (context, index) {
+                          final subscription = subscriptions[index];
+                          final sObj = {
+                            "name": subscription.name,
+                            "icon": subscription.iconUrl,
+                            "price": subscription.price.toString(),
+                          };
+
+                          return SubScriptionHomeRow(
+                            sObj: sObj,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SubscriptionInfoView(sObj: sObj),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  return StreamBuilder<List<SubscriptionModel>>(
+                    stream: _subscriptionService.getUpcomingBills(authProvider.user!.uid),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+
+                      final upcomingBills = snapshot.data ?? [];
+
+                      if (upcomingBills.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Center(
+                            child: Text(
+                              'No upcoming bills found.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                        );
+                      }
+
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: upcomingBills.length,
+                        itemBuilder: (context, index) {
+                          final bill = upcomingBills[index];
+                          final sObj = {
+                            "name": bill.name,
+                            "date": bill.nextBillingDate,
+                            "price": bill.price.toString(),
+                          };
+
+                          return UpcomingBillRow(
+                            sObj: sObj,
+                            onPressed: () {},
+                          );
+                        },
+                      );
+                    },
+                  );
+                }
+              },
+            ),
             const SizedBox(
               height: 110,
             ),

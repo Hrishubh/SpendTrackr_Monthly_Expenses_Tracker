@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:SpendTrackr/view/login/sign_in_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/primary_button.dart';
 import '../../common_widget/round_textfield.dart';
 import '../../common_widget/secondary_boutton.dart';
+import '../../providers/auth_provider.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -16,6 +18,7 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
+  TextEditingController txtName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,14 @@ class _SignUpViewState extends State<SignUpView> {
               Image.asset("assets/img/app_logo.png",
                   width: media.width * 0.5, fit: BoxFit.contain),
               const Spacer(),
+              RoundTextField(
+                title: "Full Name",
+                controller: txtName,
+                keyboardType: TextInputType.name,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
               RoundTextField(
                 title: "E-mail address",
                 controller: txtEmail,
@@ -104,13 +115,42 @@ class _SignUpViewState extends State<SignUpView> {
               ),
               PrimaryButton(
                 title: "Get started, it's free!",
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SocialLoginView(),
-                  //   ),
-                  // );
+                onPressed: () async {
+                  if (txtName.text.isEmpty || txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please fill in all fields'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  if (txtPassword.text.length < 8) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Password must be at least 8 characters long'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                  final success = await authProvider.signUp(
+                    email: txtEmail.text.trim(),
+                    password: txtPassword.text,
+                    displayName: txtName.text.trim(),
+                  );
+
+                  if (!success && mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(authProvider.errorMessage ?? 'Sign up failed'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
               ),
               const Spacer(),

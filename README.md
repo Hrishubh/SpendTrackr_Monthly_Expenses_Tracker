@@ -1,9 +1,10 @@
 # 💸 SpendTrackr: Monthly Expenses Tracker
 
-> **A beautifully designed Flutter app to track, analyze, and manage your monthly expenses, subscriptions, and budgets with ease.**
+> **A beautifully designed Flutter app with Firebase integration to track, analyze, and manage your monthly expenses, subscriptions, and budgets in real-time.**
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.19.6-blue?style=for-the-badge&logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.4.3-0175C2?style=for-the-badge&logo=dart)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![Android](https://img.shields.io/badge/Android-12.0-green?style=for-the-badge&logo=android)
 ![iOS](https://img.shields.io/badge/iOS-17.0-black?style=for-the-badge&logo=apple)
 
@@ -12,15 +13,13 @@
 - [Overview](#-overview)
 - [Key Features](#-key-features)
 - [Technology Stack](#-technology-stack)
-- [Architecture](#-architecture)
+- [Firebase Integration](#-firebase-integration)
 - [Installation](#-installation)
+- [Firebase Setup](#-firebase-setup)
 - [Usage](#-usage)
 - [Screenshots](#-screenshots)
-- [Performance Optimizations](#-performance-optimizations)
 - [Contributing](#-contributing)
 - [License](#-license)
-- [Acknowledgments](#-acknowledgments)
-- [Contact](#-contact)
 
 ---
 
@@ -63,46 +62,79 @@
 - Trends and historical data
 
 ### 🛡️ **Secure & Private**
-- All data stored locally on device (no cloud required)
-- Optional biometric authentication (Face ID, Touch ID)
+- Firebase Authentication for secure user accounts
+- User-specific data isolation in Firestore
+- Real-time data synchronization across devices
+
+### 🔄 **Real-time Updates**
+- Live subscription tracking
+- Instant budget updates
+- Real-time bill notifications
 
 ---
 
 ## 🛠 Technology Stack
 
+### **Frontend**
 - **Flutter 3.19.6** - Cross-platform UI toolkit
-- **Dart 3.4.3** - Programming language for Flutter
+- **Dart 3.4.3** - Programming language
 - **Provider** - State management
-- **SQLite** - Local data storage
-- **Charts/Graph Libraries** - Data visualization
-- **Custom Widgets** - For reusable UI components
+- **Custom Widgets** - Reusable UI components
+
+### **Backend & Database**
+- **Firebase Authentication** - User authentication
+- **Cloud Firestore** - NoSQL database
+- **Firebase Storage** - File storage (future)
+
+### **Additional Libraries**
+- **UUID** - Unique ID generation
+- **Intl** - Internationalization
+- **Custom Calendar** - Calendar agenda widget
+- **Card Swiper** - Interactive card carousel
 
 ---
 
-## 🏗 Architecture
+## 🔥 Firebase Integration
 
-The app follows a modular, maintainable architecture:
+SpendTrackr uses Firebase for a complete backend solution:
 
+### **Authentication**
+- Email/Password sign up and sign in
+- Password reset functionality
+- Secure user session management
+- User profile management
+
+### **Database Structure**
 ```
-┌────────────────────┐
-│    Presentation    │
-│  (Flutter Widgets) │
-└─────────┬──────────┘
-          │
-┌─────────▼──────────┐
-│   State Management │
-│     (Provider)     │
-└─────────┬──────────┘
-          │
-┌─────────▼──────────┐
-│   Data Layer       │
-│ (SQLite, Models)   │
-└────────────────────┘
+📁 users/
+├── User profiles and settings
+
+📁 subscriptions/
+├── Netflix, Spotify, YouTube Premium, etc.
+├── Billing cycles and amounts
+└── Next billing dates
+
+📁 budgets/
+├── Monthly budget categories
+├── Spent amount tracking
+└── Budget periods
+
+📁 transactions/
+├── Income and expense records
+├── Linked to subscriptions/budgets
+└── Payment methods
+
+📁 cards/
+├── Credit/debit card information
+├── Balances and limits
+└── Secure storage (last 4 digits only)
 ```
 
-- **Presentation**: All UI screens and widgets
-- **State Management**: Handles app state and business logic
-- **Data Layer**: Local database and data models
+### **Real-time Features**
+- Live subscription updates
+- Instant budget tracking
+- Real-time bill notifications
+- Cross-device synchronization
 
 ---
 
@@ -110,16 +142,17 @@ The app follows a modular, maintainable architecture:
 
 ### Prerequisites
 
-- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (3.19.6 or compatible)
+- [Firebase CLI](https://firebase.google.com/docs/cli) (for Firebase setup)
 - Android Studio or Xcode (for emulators/simulators)
 - A device or emulator
 
-### Setup Instructions
+### Quick Start
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/spendtrackr.git
-   cd spendtrackr_monthly_expenses_tracker
+   git clone https://github.com/your-username/SpendTrackr_Monthly_Expenses_Tracker.git
+   cd SpendTrackr_Monthly_Expenses_Tracker
    ```
 
 2. **Install dependencies**
@@ -127,18 +160,73 @@ The app follows a modular, maintainable architecture:
    flutter pub get
    ```
 
-3. **Run the app**
+3. **Set up Firebase** (see [Firebase Setup](#-firebase-setup) section below)
+
+4. **Run the app**
    ```bash
    flutter run
    ```
 
-4. **Build for release**
-   - Android:
-     ```bash
-     flutter build apk
-     ```
-   - iOS:
-     ```bash
+---
+
+## 🔥 Firebase Setup
+
+### Step 1: Create Firebase Project
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project: `spendtrackr-app`
+3. Enable Google Analytics (optional)
+
+### Step 2: Enable Services
+
+1. **Authentication**: Enable Email/Password sign-in
+2. **Firestore**: Create database in test mode
+3. **Storage**: Enable for future file uploads
+
+### Step 3: Add Your App
+
+1. Add Android app with package name: `com.example.spendtrackr`
+2. Download `google-services.json` → place in `android/app/`
+3. Add iOS app with bundle ID: `com.example.spendtrackr`
+4. Download `GoogleService-Info.plist` → place in `ios/Runner/`
+
+### Step 4: Configure Firebase Options
+
+Update `lib/firebase_options.dart` with your project config:
+
+```dart
+static const FirebaseOptions android = FirebaseOptions(
+  apiKey: 'your-android-api-key',
+  appId: 'your-android-app-id',
+  messagingSenderId: 'your-sender-id',
+  projectId: 'your-project-id',
+  storageBucket: 'your-project-id.appspot.com',
+);
+```
+
+### Step 5: Populate Sample Data (Optional)
+
+Use the provided PowerShell script to add dummy data:
+
+```powershell
+# Get access token
+gcloud auth application-default login
+gcloud auth application-default print-access-token
+
+# Run population script
+powershell -ExecutionPolicy Bypass -File populate_firebase.ps1 -ProjectId "your-project-id" -AccessToken "your-access-token"
+```
+
+For detailed setup instructions, see [`FIREBASE_SETUP.md`](FIREBASE_SETUP.md)
+
+### Build for Release
+
+- **Android APK:**
+  ```bash
+  flutter build apk --release
+  ```
+- **iOS:**
+  ```bash
      flutter build ios
      ```
 
@@ -146,17 +234,65 @@ The app follows a modular, maintainable architecture:
 
 ## 📖 Usage
 
-1. **Add Expenses**: Tap the "+" button to add a new expense, select a category, enter the amount, and save.
-2. **Manage Subscriptions**: Go to the Subscriptions tab to add or edit recurring payments.
-3. **Set Budgets**: Navigate to Budgets, set monthly limits, and track your progress.
-4. **View Analytics**: Explore the Analytics tab for charts and spending insights.
-5. **Calendar View**: Check the calendar for upcoming bills and past expenses.
+### Getting Started
+
+1. **Create Account**: Sign up with email and password
+2. **Automatic Setup**: App automatically populates with sample data for new users
+3. **Explore Features**: Navigate through different tabs to explore functionality
+
+### Main Features
+
+1. **📊 Dashboard**: 
+   - View total monthly spending
+   - See active subscriptions
+   - Check upcoming bills
+   - Monitor budget progress
+
+2. **💳 Subscriptions**:
+   - Track Netflix, Spotify, YouTube Premium, etc.
+   - View next billing dates
+   - Add new subscriptions with the "+" button
+
+3. **💰 Budgets**:
+   - Monitor spending by category
+   - Set monthly limits
+   - Track progress with visual indicators
+
+4. **📅 Calendar**:
+   - View expenses and bills by date
+   - Agenda-style overview
+   - Monthly/weekly views
+
+5. **⚙️ Settings**:
+   - View user profile
+   - Sign out securely
+   - App preferences
 
 ---
 
 ## 🖼 Screenshots
 
 Below are screenshots demonstrating the main features and UI of SpendTrackr:
+
+### Dashboard
+<div align="center">
+  <img src="assets/readme_img/Cover_Screen.jpg" alt="Dashboard" width="300"/>
+  <br/>
+  <em>Cover Screen of the application.</em>
+</div>
+
+---
+
+### Dashboard
+<div align="center">
+  <img src="assets/readme_img/Login_Screen.jpg" alt="Dashboard" width="300"/>
+  <img src="assets/readme_img/Login_Screen2.jpg" alt="Dashboard" width="300"/>
+  
+  <br/>
+  <em>Login Pages of the application with options to login with Google, Apple (soon) & Facebok (soon).</em>
+</div>
+
+---
 
 ### Dashboard
 <div align="center">
